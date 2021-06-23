@@ -37,26 +37,42 @@ class MainViewTests(TestCase):
     response = response.HttpResponse()
 
     def setUp(self) -> None:
+        """
+        Setup a connection
+        """
         self.client.post(reverse('login'), {'name':"ARAR"})
         self.response = self.client.get(reverse('index'))
     
     def test_main_view(self):
+        """
+        Main page without tool in DB should print "No tools".
+        """
         self.assertEqual(self.response.status_code, 200)
         self.assertContains(self.response, "No tools are available.")
     
     def test_main_view_with_tool(self):
+        """
+        Main page with tools in DB should print them.
+        """
         Tool.objects.create(name="tool_test")
         self.response = self.client.get(reverse('index'))
         self.assertContains(self.response, "tool_test")
 
 class MainViewNotConnected(TestCase):
     def test_not_connected_then_redirected(self):
+        """
+        Accessing main page while not connected should redirect (302)
+        """
         response = self.client.get(reverse('index'))
         self.assertEqual(response.status_code, 302)
 
 
 class LoginViewTests(TestCase):
     def test_connect(self):
+        """
+        Connecting should redirect (302)
+        Reloading the main page should now be OK (200)
+        """
         response = self.client.post(reverse('login'), {'name':"ARAR"})
         self.assertEqual(response.status_code, 302)
         response = self.client.get(reverse('index'))
