@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'login/style.css' %}">
+  </head>
+  <body>
+
+    <div id="left"></div>
+    <div id="right"></div>
+
+    <div id="main_login">
+      <div id="div_logo">
+        <img id="logo"
+        src="{% static 'login/images/dynae_logo.png' %}" alt="Dynae logo">
+      </div>
+        <h1>Login</h1>
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Submit">
+        </form>
+
+    </div>
+
+  </body>
+</html>
