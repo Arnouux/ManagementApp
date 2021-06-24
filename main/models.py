@@ -9,6 +9,10 @@ class Tool(models.Model):
 
     def __str__(self):
         if self.dates.exists() :
+            if len(self.dates.all()) == 1:
+                return str(self.name) + " (1 réservation)"
+            elif len(self.dates.all()) > 1:
+                return str(self.name) + " (" + str(len(self.dates.all())) +" réservations)"
             ret = str(self.name) + " ("
             for d in self.dates.all():
                 ret += str(d) + ', '
@@ -29,10 +33,5 @@ class Reservation(models.Model):
     tool = models.ForeignKey(Tool, on_delete=models.CASCADE, related_name="dates")
 
     def __str__(self):
-        return "{}/{}/{}-{}/{}/{}".format(self.start_date.day,
-                                            self.start_date.month,
-                                            self.start_date.year,
-                                            self.end_date.day,
-                                            self.end_date.month,
-                                            self.end_date.year,
-                                            )
+        return "{}-{}".format(self.start_date.strftime("%d/%m/%y"),
+                              self.end_date.strftime("%d/%m/%y"))

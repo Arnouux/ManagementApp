@@ -99,4 +99,5 @@ class UserTests(TestCase):
                             by_who="JUBO",
                             tool=tool)
         r = Reservation.objects.get(by_who="ARAR")
+        print(r)
         print(tool)

@@ -7,6 +7,7 @@ h1 {
     letter-spacing: 1px;
     padding: 0 0 40px;
     border-bottom:  #555;
+    text-shadow: 1px 1px 0 black;
 }
 
 html {
@@ -60,6 +61,7 @@ input[type=text] {
     border: 0;
     padding-bottom: 11px;
     border-bottom: 3px solid rgb(240, 102, 102);
+    text-shadow: 1px 1px 0 black;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -117,4 +119,16 @@ background-color: lightcoral;
 box-shadow: 0px 15px 20px rgba(194, 73, 241, 0.4);
 color: #dfdddd;
 transform: translateY(-7px);
+}
+
+input[type=text]::-moz-selection {
+    color: rgb(138, 79, 3);
+    background-color: #73abb2;
+    text-shadow: 1px 1px 0 #ffffff;
+}
+  
+input[type=text]::selection {
+    color: rgb(138, 79, 3);
+    background-color: #73abb2;
+    text-shadow: 1px 1px 0 #ffffff;
 }
