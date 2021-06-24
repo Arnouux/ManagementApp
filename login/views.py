@@ -10,7 +10,7 @@ def login(request):
         if form.is_valid():
             request.session["name"] = form.cleaned_data.get("name").upper()
             if request.session.get("name") == "ADMIN":
-                return HttpResponseRedirect('/admin/')
+                return HttpResponseRedirect('/control/')
             else:
                 return HttpResponseRedirect('/main/')
     else:
