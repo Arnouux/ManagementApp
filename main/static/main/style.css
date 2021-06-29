@@ -25,7 +25,7 @@ body {
     background-color: #487d83;
 }
 
-#logout {
+#logout, #back {
     color: #000000;
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
@@ -37,7 +37,7 @@ body {
     border-radius: 10px;
 }
 
-#logout:hover {
+#logout:hover, #back:hover {
     background-color: lightcoral;
     color: #dfdddd;
     cursor: pointer;

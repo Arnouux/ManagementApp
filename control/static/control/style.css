@@ -19,12 +19,6 @@ body {
     float: right;
 }
 
-.table {
-    margin-top: 10px;
-    padding: 20px;
-    background-color: #487d83;
-}
-
 #logout {
     color: #000000;
     font-family: 'Roboto', sans-serif;
@@ -41,4 +35,78 @@ body {
     background-color: lightcoral;
     color: #dfdddd;
     cursor: pointer;
+}
+
+
+.table {
+    margin-top: 10px;
+    padding: 20px;
+}
+
+
+.left {
+    float: left;
+    width: 30%;
+    margin: 10px;
+    background-color: #487d83;
+}
+
+.middle {
+    float: left;
+    width: 30%;
+    margin: 10px;
+    background-color: #487d83;
+}
+
+.right {
+    float: left;
+    width: 30%;
+    margin: 10px;
+    background-color: #487d83;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    background-color: white;
+    margin-bottom: 10px;
+    padding:30px;
+}
+
+li:hover {
+    background-color: rgb(189, 189, 189);
+}
+
+li:hover > .actionForm {
+    display: block;
+}
+
+.actionForm {
+    display: none;
+    float: right;
+    margin-left: 3px;
+}
+
+.addButton {
+    float: right;
+}
+
+#rename_div {
+    background-color: sandybrown;
+    position:absolute;
+    top: 40%;
+    left: 40%;
+    padding: 50px;
+}
+
+#delete_div {
+    background-color: sandybrown;
+    position:absolute;
+    top: 40%;
+    left: 40%;
+    padding: 50px;
 }
