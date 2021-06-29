@@ -1,6 +1,7 @@
 from django.http import response
 from django.test import TestCase
 import datetime
+from django.test.client import Client
 from django.utils import timezone
 from django.urls import reverse
 from .models import Reservation, Tool
@@ -43,7 +44,7 @@ class MainViewTests(TestCase):
         """
         Setup a connection
         """
-        self.client.post(reverse('login'), {'name':"ARAR"})
+        self.client.post(reverse('login'), {'name':"ARAR", 'password':"arararar"})
         self.response = self.client.get(reverse('sortie'))
     
     def test_main_view(self):
@@ -71,14 +72,32 @@ class MainViewNotConnected(TestCase):
 
 
 class LoginViewTests(TestCase):
+    def setUp(self) -> None:
+        """
+        Setup a user
+        """
+        user = User.objects.create_user(username="arar".upper(),
+                            first_name="first",
+                            last_name="last",
+                            email="mail@test.fr",
+                            password="arararar")
+        user.save()
+        
     def test_connect(self):
         """
-        Connecting should redirect (302)
-        Reloading the main page should now be OK (200)
+        Connecting with good creditencials -> redirect to main (302)
         """
-        response = self.client.post(reverse('login'), {'name':"ARAR"})
+        response = self.client.post(reverse('login'), {'name':"ARAR", 'password':"arararar"})
         self.assertEqual(response.status_code, 302)
-        response = self.client.get(reverse('index'))
+    
+    def test_connect_bad(self):
+        """
+        Connecting with bad creditencials -> reload login page (200)
+        """
+        c= Client()
+        result = c.login(username='ARAR', password='??')
+        self.assertFalse(result)
+        response = self.client.post(reverse('login'), {'name':"ARAR", 'password':"false"})
         self.assertEqual(response.status_code, 200)
 
 class UserTests(TestCase):
@@ -104,15 +123,13 @@ class UserTests(TestCase):
 class ExcelTests(TestCase):
     def test_read(self):
         path = settings.FILE_EXCEL_PLANNING
-        print(path)
         
         wb = openpyxl.load_workbook(path)
-        print(wb.sheetnames)
         tools = wb["Acquisition + Capteurs"]
 
-        for row in tools.iter_rows() :
-            for cell in row :
-                if cell.value == "CTMO 59":
-                    print(cell.row, cell.column)
+        # for row in tools.iter_rows() :
+        #     for cell in row :
+        #         if cell.value == "CTMO 59":
+        #             print(cell.row, cell.column)
         
         
