@@ -86,17 +86,19 @@ def index(request):
     ws = wb.active
     
     codes = {}
+    row_nb = -1
     for i, row in enumerate(ws.iter_rows()):
         if (row[0].value is not None and
             row[0].value.upper() == request.user.last_name.upper()):
             row_nb = i
             break
     
-    for col in ws.iter_cols():
-        if col[row_nb].value is not None:
-            codes[col[4].value] = True
-        else :
-            codes[col[4].value] = False
+    if row_nb != -1:
+        for col in ws.iter_cols():
+            if col[row_nb].value is not None:
+                codes[col[4].value] = True
+            else :
+                codes[col[4].value] = False
     codes.pop(None, None)
     codes.pop('D = Devis\nM = Mesures\nR = Rapport', None)
     if codes is not None :

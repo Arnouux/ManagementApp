@@ -47,7 +47,6 @@
         {% endif %}
         <div class="left category">
             <div class="table">
-                {% if tools_list %}
                 <ul>
                     <li>
                         <form action="{% url 'control' %}" method="post">
@@ -56,6 +55,7 @@
                             <input type="submit" value="Ajouter" class="addButton">
                         </form>
                     </li>
+                {% if tools_list %}
                 {% for tool in tools_list %}
                     <li>
                         <a href="/main/reserve/{{ tool.id }}/">{{ tool.name }}</a>
@@ -68,10 +68,10 @@
                         
                     </li>
                 {% endfor %}
-                </ul>
                 {% else %}
                     <p>No tools are available.</p>
                 {% endif %}
+                </ul>
               </div>
         </div>
         
@@ -80,7 +80,26 @@
         </div>
     
         <div class="right infos">
-            right
+          <div  class="table">
+            
+          <ul>
+            <li>
+              <form action="{% url 'control' %}" method="post">
+                  {% csrf_token %}
+                  {{ user_form }}
+                  Note : le mdp sera automatiquement le username répété deux fois en minuscule.
+                  <input type="submit" value="Ajouter" class="addButton">
+              </form>
+            </li>
+            {% if users_list %}
+                {% for user in users_list %}
+                <li>
+                  {{ user }}
+                </li>
+                {% endfor %}
+            {% endif %}
+          </ul>
+          </div>
         </div>
     </div>
     
