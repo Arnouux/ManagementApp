@@ -5,6 +5,9 @@ from django.utils import timezone
 from django.urls import reverse
 from .models import Reservation, Tool
 from django.contrib.auth.models import User
+import pandas as pd
+import openpyxl
+from django.conf import settings
 
 class ToolModelTests(TestCase):
 
@@ -41,7 +44,7 @@ class MainViewTests(TestCase):
         Setup a connection
         """
         self.client.post(reverse('login'), {'name':"ARAR"})
-        self.response = self.client.get(reverse('index'))
+        self.response = self.client.get(reverse('sortie'))
     
     def test_main_view(self):
         """
@@ -55,7 +58,7 @@ class MainViewTests(TestCase):
         Main page with tools in DB should print them.
         """
         Tool.objects.create(name="tool_test")
-        self.response = self.client.get(reverse('index'))
+        self.response = self.client.get(reverse('sortie'))
         self.assertContains(self.response, "tool_test")
 
 class MainViewNotConnected(TestCase):
@@ -84,11 +87,9 @@ class UserTests(TestCase):
         TODO : test Users
         """
         User.objects.create(username="username")
-        print(User.objects.get(username="username"))
 
         Tool.objects.create(name="tool_test")
         tool = Tool.objects.get(name="tool_test")
-        print(tool)
         Reservation.objects.create(start_date=timezone.now(),
                             end_date=timezone.now() + datetime.timedelta(days=30),
                             by_who="ARAR",
@@ -99,5 +100,19 @@ class UserTests(TestCase):
                             by_who="JUBO",
                             tool=tool)
         r = Reservation.objects.get(by_who="ARAR")
-        print(r)
-        print(tool)
+
+class ExcelTests(TestCase):
+    def test_read(self):
+        path = settings.FILE_EXCEL_PLANNING
+        print(path)
+        
+        wb = openpyxl.load_workbook(path)
+        print(wb.sheetnames)
+        tools = wb["Acquisition + Capteurs"]
+
+        for row in tools.iter_rows() :
+            for cell in row :
+                if cell.value == "CTMO 59":
+                    print(cell.row, cell.column)
+        
+        

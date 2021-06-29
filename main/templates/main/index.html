@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Main</title>
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/index.css' %}">
     
   </head>
   
@@ -21,16 +22,47 @@
       </div>
     </div>
 
-    <div class="table">
-      {% if tools_list %}
-      <ul>
-      {% for tool in tools_list %}
-          <li><a href="/main/reserve/{{ tool.id }}/">{{ tool.name }}</a></li>
-      {% endfor %}
-      </ul>
-      {% else %}
-          <p>No tools are available.</p>
-      {% endif %}
+    <div id="div_consultation">
+      <p class="consultation">
+        {% if fullname %}
+        {{ fullname }}
+        <br>
+        Habilitation électrique R/Elec : {% if elecIsOld %} <font color="red"> {{ dateElec }} </font>
+        {% else %} <font color="#13cf52"> {{ dateElec }} </font> {% endif %}
+        <br>
+        Visite médicale : {% if medicIsOld %} <font color="red"> {{ dateMedic }} </font>
+                          {% else %} <font color="#13cf52"> {{ dateMedic }} </font> {% endif %}
+        {% else %}
+        Vos nom et prénom ne sont pas enregistrés dans la base de données.
+        (Excel habilitations)
+        {% endif %}
+        {% if codes %}
+        <ul>
+        {% for code, value in codes.items %}
+          <li>
+            {% if value %} <font color="#13cf52" size=4>{{code}}</font>
+            {% else %}<font color="red" size=3>{{code}}</font>{% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        Votre nom n'est pas enregistré dans la base de données.
+        (Excel codes affaires)
+        {% endif %}
+      </p>
+    </div>
+    <div id="div_materiel">
+      
+      <a href="/main/sortie">
+        <button id="btn_sortie" value="sortie" class="btnMateriel">Sortie</button>
+      </a>
+      <a href="/main/retour">
+        <button id="btn_retour" value="retour" class="btnMateriel">Retour</button>
+      </a>
+      <a href="/main/pret">
+        <button id="btn_pret" value="pret" class="btnMateriel">Prêt</button>
+      </a>
+
     </div>
     
   </body>

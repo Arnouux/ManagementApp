@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'control/style.css' %}">
+    
+  </head>
+  
+  <body>
+    
+    
+
+
+    <div id="header">
+      <div id="header_left">
+        Hello {{ name }}
+      </div>
+      <div id="header_right">
+        <a href="/login/">
+          <button id="logout" value="Logout">Logout</button>
+        </a>
+      </div>
+    </div>
+
+
+    <div id="main">
+        {% if form_delete %}
+        <div id="delete_div">
+            <form action="{% url 'control' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" name="btnYesOrNo" value="yes">
+                <input type="submit" name="btnYesOrNo" value="no">
+               </form>
+        </div>
+        {% endif %}
+
+        {% if form_rename %}
+        <div id="rename_div">
+            <form action="{% url 'control' %}" method="post">
+                {% csrf_token %}
+                {{ form_rename }}
+                <input type="submit" value="Valider">
+            </form>
+        </div>
+        {% endif %}
+        <div class="left category">
+            <div class="table">
+                {% if tools_list %}
+                <ul>
+                    <li>
+                        <form action="{% url 'control' %}" method="post">
+                            {% csrf_token %}
+                            {{ form }}
+                            <input type="submit" value="Ajouter" class="addButton">
+                        </form>
+                    </li>
+                {% for tool in tools_list %}
+                    <li>
+                        <a href="/main/reserve/{{ tool.id }}/">{{ tool.name }}</a>
+                        <form class="actionForm" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{ tool.id }}" />
+                            <input type="submit" name="rename" value="Rename">
+                            <input type="submit" name="delete" value="Delete">
+                        </form>
+                        
+                    </li>
+                {% endfor %}
+                </ul>
+                {% else %}
+                    <p>No tools are available.</p>
+                {% endif %}
+              </div>
+        </div>
+        
+        <div class="middle tool">
+            Mid
+        </div>
+    
+        <div class="right infos">
+            right
+        </div>
+    </div>
+    
+
+    
+  </body>
+</html>

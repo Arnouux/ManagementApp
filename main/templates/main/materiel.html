@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Main</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+    
+  </head>
+  
+  <body>
+
+    <div id="header">
+      <div id="header_left">
+        Hello {{ name }}
+      </div>
+      <div id="header_right">
+        <input id="back" type=button value="Retour" onClick="window.history.back();return false;">
+        <a href="/login/">
+            <button id="logout" value="Logout">Logout</button>
+        </a>
+      </div>
+    </div>
+
+    <div id="sortie">
+        <a href="/main/sortie">
+          <button id="btn_sortie" value="sortie">Sortie</button>
+        </a>
+    </div>
+    <div id="retour">
+        <a href="/main/retour">
+          <button id="btn_retour" value="retour">Retour</button>
+        </a>
+    </div>
+    <div id="pret">
+        <a href="/main/pret">
+          <button id="btn_pret" value="pret">Prêt</button>
+        </a>
+    </div>
+    
+  </body>
+</html>

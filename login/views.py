@@ -1,3 +1,5 @@
+from django.contrib.auth import authenticate
+import django.contrib.auth
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import NameForm
@@ -9,10 +11,13 @@ def login(request):
         form = NameForm(request.POST)
         if form.is_valid():
             request.session["name"] = form.cleaned_data.get("name").upper()
-            if request.session.get("name") == "ADMIN":
-                return HttpResponseRedirect('/admin/')
-            else:
+            name = request.session.get("name")
+            user = authenticate(username=name, password="jubojubo")
+            if user is not None :
+                django.contrib.auth.login(request, user)
                 return HttpResponseRedirect('/main/')
+            if name == "ADMIN":
+                return HttpResponseRedirect('/control/')
     else:
         form = NameForm()
     return render(request, 'login/login.html', {'form':form})

@@ -7,7 +7,6 @@ h1 {
     letter-spacing: 1px;
     padding: 0 0 40px;
     border-bottom:  #555;
-    text-shadow: 1px 1px 0 black;
 }
 
 html {
@@ -61,12 +60,14 @@ input[type=text] {
     border: 0;
     padding-bottom: 11px;
     border-bottom: 3px solid rgb(240, 102, 102);
-    text-shadow: 1px 1px 0 black;
+    /* text-shadow: 1px 1px 0 rgb(99, 54, 11), -1px 1px 0 rgb(99, 54, 11),
+        1px -1px 0 rgb(99, 54, 11), -1px -1px 0 rgb(99, 54, 11); */
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
     text-transform: none;
 }
+
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     text-transform: none;
 }
