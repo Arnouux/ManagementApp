@@ -49,7 +49,7 @@ body {
     text-align: center;
 }
 
-input[type=text] {
+.input_area {
     caret-color: rgb(240, 102, 102);
     background-color: #73abb2;
     width: 300px;
@@ -81,15 +81,15 @@ input[type=text] {
     text-transform: none;
 }
 
-input[type=text], select {
+.input_area, select {
     color: rgb(223, 132, 79);
 }
 
-input[type=text]:focus {
+.input_area:focus {
     outline: none;
 }
 
-input[type=text]:-webkit-autofill {
+.input_area:-webkit-autofill {
 	box-shadow:0 0 0 35px #e1b641 inset;
     font-size: 55px;
     color: #e4e4ff;
@@ -122,14 +122,20 @@ color: #dfdddd;
 transform: translateY(-7px);
 }
 
-input[type=text]::-moz-selection {
+.input_area::-moz-selection {
     color: rgb(138, 79, 3);
     background-color: #73abb2;
     text-shadow: 1px 1px 0 #ffffff;
 }
   
-input[type=text]::selection {
+.input_area::selection {
     color: rgb(138, 79, 3);
     background-color: #73abb2;
     text-shadow: 1px 1px 0 #ffffff;
+}
+
+input[type=password] {
+    border:0;
+    margin-top: -10px;
+    border-top: 3px solid rgb(240, 102, 102);
 }
