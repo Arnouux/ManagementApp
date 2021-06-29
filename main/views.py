@@ -27,7 +27,6 @@ def login_required(f, request, *args, **kwargs):
     """
     name = request.session.get("name")
     if name is None:
-        print("login_required")
         return HttpResponseRedirect('/login/')
     else :
         return f(request, *args, **kwargs)

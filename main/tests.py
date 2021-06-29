@@ -86,9 +86,12 @@ class LoginViewTests(TestCase):
     def test_connect(self):
         """
         Connecting with good creditencials -> redirect to main (302)
+        Assert Polygram is visible
         """
         response = self.client.post(reverse('login'), {'name':"ARAR", 'password':"arararar"})
         self.assertEqual(response.status_code, 302)
+        response = self.client.get(reverse('index'))
+        self.assertContains(response, "Hello ARAR")
     
     def test_connect_bad(self):
         """

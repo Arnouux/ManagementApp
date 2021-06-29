@@ -37,5 +37,12 @@ body {
 }
 
 .consultation {
-    margin-left:10%
+    margin-left:10%;
+    white-space: pre-wrap;
+    line-height: 50%;
+    font-size: 120%;
+}
+
+#list_codes {
+    margin-left:5%;
 }
