@@ -64,6 +64,10 @@ body {
         1px -1px 0 rgb(99, 54, 11), -1px -1px 0 rgb(99, 54, 11); */
 }
 
+input[type=password] {
+    width: 400px;
+}
+
 ::-webkit-input-placeholder { /* WebKit browsers */
     text-transform: none;
 }
@@ -136,6 +140,4 @@ transform: translateY(-7px);
 
 input[type=password] {
     border:0;
-    margin-top: -10px;
-    border-top: 3px solid rgb(240, 102, 102);
 }

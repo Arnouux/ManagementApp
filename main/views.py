@@ -52,10 +52,10 @@ def index(request):
 
     wb = openpyxl.load_workbook(habilitations)
     ws = wb.active
+    context['fullname'] = f"{request.user.first_name} {request.user.last_name.upper()}"
     for row in ws.iter_rows():
         if (row[0].value is not None and
             row[0].value.upper() == f"{request.user.last_name} {request.user.first_name}".upper()):
-            context['fullname'] = f"{request.user.first_name} {request.user.last_name.upper()}"
             
             dateElec = str(row[2].value)
             dateMedic = str(row[10].value)

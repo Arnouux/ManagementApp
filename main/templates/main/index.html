@@ -13,7 +13,7 @@
 
     <div id="header">
       <div id="header_left">
-        Hello {{ name }}
+        Connecté en tant que {{ name }}
       </div>
       <div id="header_right">
         <a href="/login/">
@@ -24,8 +24,10 @@
 
     <div id="div_consultation">
       <p class="consultation">
-        {% if fullname %}
-        <b>Tableau de bord de {{ fullname }}</b>
+        <span>Tableau de bord de {{ fullname }}
+        <a href="/main/account" id="account_link">
+        <button id="btn_account" value="account" class="btnAccount">Mon profil</button></a></span>
+        {% if dateElec %}
         <br>
         Habilitation électrique R/Elec : {% if elecIsOld %} <font color="red"> {{ dateElec }} </font>
         {% else %} <font color="#13cf52"> {{ dateElec }} </font> {% endif %}
@@ -40,8 +42,8 @@
         <ul id="list_codes">
         {% for code, value in codes.items %}
           <li>
-            {% if value %} <font color="#13cf52" size=4>{{code}}</font>
-            {% else %}<font color="red" size=3>{{code}}</font>{% endif %}
+            {% if value %} <font color="#13cf52" size=5>{{code}}</font>
+            {% else %}<font color="red" size=4>{{code}}</font>{% endif %}
           </li>
         {% endfor %}
         </ul>
@@ -56,11 +58,14 @@
       <a href="/main/sortie">
         <button id="btn_sortie" value="sortie" class="btnMateriel">Sortie</button>
       </a>
+      <a href="/main/pret">
+        <button id="btn_pret" value="pret" class="btnMateriel">Prêt</button>
+      </a>
       <a href="/main/retour">
         <button id="btn_retour" value="retour" class="btnMateriel">Retour</button>
       </a>
-      <a href="/main/pret">
-        <button id="btn_pret" value="pret" class="btnMateriel">Prêt</button>
+      <a href="/main/recherche">
+        <button id="btn_recherche" value="recherche" class="btnMateriel">Rechercher</button>
       </a>
 
     </div>
