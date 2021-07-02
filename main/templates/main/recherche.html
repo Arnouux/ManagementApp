@@ -1,0 +1,43 @@
+{% load show_tool %}
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script>
+            setInterval(function() {
+                $.ajax({
+                    url: "{% url 'recherche' %}",
+                    type: 'POST',
+                    data: {
+                        autopost: 'autopost',
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success:function(response) {
+                        const c = document.getElementById('current_tool');
+                        c.innerHTML = response;
+                    }
+                });
+            }, 3000);
+        </script>
+    </head>
+
+    <body>
+
+        <div id="header">
+            <div id="header_left">
+              Connecté en tant que {{ name }}
+            </div>
+            <div id="header_right">
+              <a href="/main/">
+                <button id="back" value="back">Retour</button>
+              </a>
+              <a href="/login/">
+                <button id="logout" value="Logout">Logout</button>
+              </a>
+            </div>
+          </div>
+
+          recherche : <div id="current_tool"></div>
+        
+        <!-- <img src=" {% url 'video_feed' %}"> -->
+    </body>
+</html>

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http.response import HttpResponseRedirect
 from main.models import Tool
-from .forms import CategoryForm, DeleteForm, RenameForm
+from .forms import CategoryForm, DeleteForm, RenameForm, NewUserForm
+from django.contrib.auth.models import User
 
 def control(request):
     context = {}
@@ -32,6 +33,16 @@ def control(request):
         if form.is_valid():
             category = form.cleaned_data.get("name")
             Tool.objects.create(name=category)
+            
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            user = User.objects.create_user(username=username.upper(),
+                                       first_name=form.cleaned_data.get("first_name"),
+                                       last_name=form.cleaned_data.get("last_name"),
+                                       email=form.cleaned_data.get("mail"),
+                                       password=f"{username.lower()}{username.lower()}")
+            user.save()
         
     
     tools_list = Tool.objects.order_by('name')
@@ -40,8 +51,11 @@ def control(request):
     context['tools_list'] = tools_list
     context['form'] = form
     
-        
-        
+    users_list = User.objects.all()
+    context["users_list"] = users_list
+    user_form = NewUserForm()
+    context["user_form"] = user_form
+
     name = request.session.get("name")
     if name is None:
         return HttpResponseRedirect('/login/')

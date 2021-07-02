@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Main</title>
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/sortie.css' %}">
     
   </head>
   
@@ -12,27 +13,45 @@
 
     <div id="header">
       <div id="header_left">
-        Hello {{ name }}
+        Connecté en tant que {{ name }}
       </div>
       <div id="header_right">
-        <input id="back" type=button value="Retour" onClick="window.history.back();return false;">
+        <a href="/main/">
+          <button id="back" value="back">Retour</button>
+        </a>
         <a href="/login/">
           <button id="logout" value="Logout">Logout</button>
         </a>
       </div>
     </div>
 
-    <div class="table">
-      {% if tools_list %}
-      <ul>
-      {% for tool in tools_list %}
-          <li><a href="/main/reserve/{{ tool.id }}/">{{ tool.name }}</a></li>
-      {% endfor %}
-      </ul>
-      {% else %}
-          <p>No tools are available.</p>
-      {% endif %}
+    <div id="main">
+      <div class="left table">
+        {% if categories_list %}
+        <form action="", method="POST">
+        {% csrf_token %}
+          {% for cat in categories_list %}
+              <button name="id_cat", value="{{cat}}">{{ cat }}</button>
+          {% endfor %}
+        </form>
+        </ul>
+        {% else %}
+            <p>No tools are available.</p>
+        {% endif %}
+      </div>
+      <div class="middle table">
+        {% if tools_list %}
+        <form action="", method="POST">
+          {% csrf_token %}
+          {% for tool in tools_list %}
+            <button name="id_tool", value="{{tool}}">{{ tool }}</button>
+          {% endfor %}
+        </form>
+        {% endif %}
+      </div>
+      <div class="right table">
+
+      </div>
     </div>
-    
   </body>
 </html>

@@ -29,3 +29,5 @@ class Reservation(models.Model):
     def __str__(self):
         return f"{self.start_date.strftime('%d/%m/%y')}-{self.end_date.strftime('%d/%m/%y')}"
                               
+class SelectedTool(models.Model):
+    name = models.CharField(max_length=200)
