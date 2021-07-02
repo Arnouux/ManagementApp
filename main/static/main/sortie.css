@@ -19,7 +19,7 @@
     background-color: #487d83;
 }
 
-.table {
+.listItem {
     margin-top: 10px;
     padding: 10px;
     background-color: #487d83;
@@ -27,4 +27,21 @@
 
 .main {
     width: 100%;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+}
+
+table {
+    background-color: blueviolet;
+}
+
+.ui-datepicker {
+    background-color: brown;
+}
+
+.ui-icon-circle-triangle-e {
+    background-color: chartreuse;
 }

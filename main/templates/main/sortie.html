@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'main/sortie.css' %}">
     
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   
   <body>
@@ -26,12 +28,13 @@
     </div>
 
     <div id="main">
-      <div class="left table">
+      <div class="left listItem">
         {% if categories_list %}
+        <ul>
         <form action="", method="POST">
         {% csrf_token %}
           {% for cat in categories_list %}
-              <button name="id_cat", value="{{cat}}">{{ cat }}</button>
+              <li><button name="id_cat", value="{{cat}}">{{ cat }}</button></li>
           {% endfor %}
         </form>
         </ul>
@@ -39,18 +42,53 @@
             <p>No tools are available.</p>
         {% endif %}
       </div>
-      <div class="middle table">
+      <div class="middle listItem">
         {% if tools_list %}
-        <form action="", method="POST">
-          {% csrf_token %}
-          {% for tool in tools_list %}
-            <button name="id_tool", value="{{tool}}">{{ tool }}</button>
-          {% endfor %}
-        </form>
+        <ul>
+          <form action="", method="POST">
+            {% csrf_token %}
+            {% for tool in tools_list %}
+              <li><button name="id_tool", value="{{tool}}">{{ tool }}</button></li>
+            {% endfor %}
+          </form>
+        </ul>
         {% endif %}
       </div>
       <div class="right table">
+        {% if current_tool %}
+          <!-- <div class="date">Date de début <input type="date"></div>
+          <div class="date">Date de fin     <input type="date"></div> -->
 
+          <div id="calendar">
+            <script>
+              var array = "{{ dates_occupied }}"
+              $( function() {
+                $( ".datepicker" ).datepicker({
+                  altField: "#datepicker",
+                  closeText: 'Fermer',
+                  prevText: 'Précédent',
+                  nextText: 'Suivant',
+                  currentText: 'Aujourd\'hui',
+                  monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                  monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+                  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                  dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                  dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                  weekHeader: 'Sem.',
+                  dateFormat: 'yy-mm-dd',
+                  beforeShowDay: function(date){
+                      var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                      return [ array.indexOf(string) == -1 ]
+                  }
+                });
+              } );
+            </script>
+            <label class="date">Date de début</label><input type="text" class="datepicker" id="datepickerStart">
+            <label class="date">Date de fin</label><input type="text" class="datepicker" id="datepickerEnd">
+            
+          </div>
+
+        {% endif %}
       </div>
     </div>
   </body>
