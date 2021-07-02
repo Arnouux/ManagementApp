@@ -1,3 +1,4 @@
+from main.views import VideoCamera
 from django.contrib.auth import authenticate
 import django.contrib.auth
 from django.http.response import HttpResponseRedirect
@@ -7,6 +8,9 @@ from django.http import HttpResponse
 
 def login(request):
     request.session["name"] = None
+    list_cam = list(VideoCamera._instances)
+    if len(list_cam) > 0 :
+        del list_cam[0]
     django.contrib.auth.logout(request)
     if request.method == 'POST':
         form = ConnexionForm(request.POST)

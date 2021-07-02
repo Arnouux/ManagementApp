@@ -6,8 +6,8 @@ from django.utils import timezone
 from django.urls import reverse
 from .models import Reservation, Tool
 from django.contrib.auth.models import User
-import pandas as pd
 import openpyxl
+from openpyxl.workbook.workbook import Workbook
 from django.conf import settings
 
 class ToolModelTests(TestCase):
@@ -134,5 +134,10 @@ class ExcelTests(TestCase):
         #     for cell in row :
         #         if cell.value == "CTMO 59":
         #             print(cell.row, cell.column)
-        
-        
+                
+        path="C:\\Users\\Arthur\\Desktop\\Dynae\\output.xlsx"
+        wb = Workbook()
+        ws = wb.active
+        for i,tool in enumerate(Tool.objects.all()):
+            ws.cell(row=i+1, column=1).value = str(tool)
+        wb.save(path)

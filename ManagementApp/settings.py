@@ -22,6 +22,7 @@ FILE_EXCEL_CODE_AFFAIRE = config.get('EXCEL_FILE', 'FILE_EXCEL_CODE_AFFAIRE')
 FILE_EXCEL_HABILITATION = config.get('EXCEL_FILE', 'FILE_EXCEL_HABILITATION')
 FILE_EXCEL_PLANNING = config.get('EXCEL_FILE', 'FILE_EXCEL_PLANNING')
 FILE_EXCEL_ALL = config.get('EXCEL_FILE', 'FILE_EXCEL_ALL')
+NB_WEBCAM_TO_USE = config.getint('WEBCAM', 'NB_WEBCAM_TO_USE')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
