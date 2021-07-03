@@ -22,7 +22,8 @@ def login(request):
             if user is not None:
                 django.contrib.auth.login(request, user)
                 return HttpResponseRedirect('/main/')
-            if name == "ADMIN" and hash(pwd)==-4281904718209466055:
+            print(hash(pwd))
+            if name == "ADMIN" and pwd=="adminadmin":
                 return HttpResponseRedirect('/control/')
     else:
         form = ConnexionForm()
