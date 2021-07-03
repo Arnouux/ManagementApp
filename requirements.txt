@@ -2,3 +2,4 @@ django==3.2.4
 openpyxl==3.0.7
 pyzbar==0.1.8
 opencv-python-headless
+gunicorn
