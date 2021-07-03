@@ -157,16 +157,47 @@ def sortie(request):
     ws = wb.active
     categories_list = []
     tools_list = []
+    # Keep trace of current category (also when tool clicked)
+    current_cat = request.POST.get("id_cat")
+    if current_cat is not None :
+        request.session["current_category_selected"] = current_cat
+    if request.method == "POST":
+        current_cat = request.session.get("current_category_selected")
+    
+    # Capteur -> Cable -> Acquisition = stage
+    if request.POST.get("stageClicked") is None or request.POST.get("stageClicked") == "Capteurs" :
+        context["stage"] = "Capteurs"
+        context["previous_stage"] = None
+        context["next_stage"] = "Cables"
+    elif request.POST.get("stageClicked") == "Cables" :
+        context["stage"] = "Cables"
+        context["previous_stage"] = "Capteurs"
+        context["next_stage"] = "Acquisition"
+    elif request.POST.get("stageClicked") == "Acquisition" :
+        context["stage"] = "Acquisition"
+        context["previous_stage"] = "Cables"
+        context["next_stage"] = "Fin"
+    elif request.POST.get("stageClicked") == "Fin" :
+        return render(request, 'main/index.html', context)
+    
     for row in range(4, ws.max_row):
         category = ws.cell(row=row, column=1).value
         if category is not None :
             categories_list.append(category)
         
         tool = ws.cell(row=row, column=2).value
-        if (categories_list[-1] == request.POST.get("id_cat") 
+        if (categories_list[-1] == current_cat
             and tool is not None):
             tools_list.append(tool)
             
+    current_tool = request.POST.get("id_tool")
+    if current_tool is not None :
+        request.session["current_tool_selected"] = current_tool
+    context['current_tool'] = current_tool
+    
+    # Send dates to jQuery
+    context["dates_occupied"] = "2021-07-30","2021-07-15","2021-07-16"
+    
     context['categories_list'] = categories_list
     context['tools_list'] = tools_list
     wb.close()

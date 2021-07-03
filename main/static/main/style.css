@@ -14,6 +14,14 @@ body {
     font-size: 25px;
     padding: 10px;
 }
+@media screen and (max-width: 600px) {
+    #full {
+        display: none;
+    }
+    #little_name {
+        display: block;
+    }
+}
 
 #header_right {
     float: right;
