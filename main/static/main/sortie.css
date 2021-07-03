@@ -1,32 +1,83 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
 .left {
+    overflow: auto;
+    margin-top: 1%;
+    margin-right: 1%;
+    width: 32%;
+    height: 90%;
     float: left;
-    width: 28%;
-    margin: 10px;
     background-color: #487d83;
 }
 
 .middle {
+    overflow: auto;
+    margin-top: 1%;
+    width: 32%;
+    height: 90%;
     float: left;
-    width: 28%;
-    margin: 10px;
     background-color: #487d83;
 }
 
 .right {
+    overflow: auto;
+    margin-top: 1%;
+    margin-left: 1%;
+    width: 34%;
+    height: 90%;
     float: left;
-    width: 28%;
-    margin: 10px;
     background-color: #487d83;
 }
+@media screen and (max-width: 600px) {
+    .left, .middle, .right {
+        margin: 0 auto;
+        width: 100px; 
+    }
+}
 
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
 .listItem {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #487d83;
+    width: 100%;
+}
+.listBtn {
+    width: 100%;
+    margin-bottom: 5px;
+    font-size: 20px;
 }
 
-.main {
-    width: 100%;
+#formStage {
+    padding-bottom: 10px;
+    font-size: 25px;
+}
+
+.stageBtn {
+    float: right;
+    padding: 5px;
+    font-size: 20px;
+    width: 150px;
+}
+
+.arrow_right, .arrow_left {
+    font-size: 20px;
+    font-weight: bolder;
+}
+.arrow_left {
+    float: left;
+}
+.arrow_right {
+    float: right;
 }
 
 .date {
@@ -44,4 +95,10 @@ table {
 
 .ui-icon-circle-triangle-e {
     background-color: chartreuse;
+}
+
+.header_middle {
+    float:right;
+    margin-top:7px;
+    margin-right:7px;
 }

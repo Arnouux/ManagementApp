@@ -13,7 +13,8 @@
 
     <div id="header">
       <div id="header_left">
-        Connecté en tant que {{ name }}
+        <span id="full">Connecté en tant que</span>
+        <span id="little_name">{{ name }}</span>
       </div>
       <div id="header_right">
         <a href="/login/">
@@ -24,7 +25,7 @@
 
     <div id="div_consultation">
       <p class="consultation">
-        <span>Tableau de bord de {{ fullname }}
+        <span id="title_consultation">Tableau de bord de {{ fullname }}
         <a href="/main/account" id="account_link">
         <button id="btn_account" value="account" class="btnAccount">Mon profil</button></a></span>
         {% if dateElec %}

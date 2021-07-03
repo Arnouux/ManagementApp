@@ -15,7 +15,9 @@
 
     <div id="header">
       <div id="header_left">
-        Connecté en tant que {{ name }}
+        <span id="full">Connecté en tant que</span>
+        <span id="little_name">{{ name }}</span>
+        
       </div>
       <div id="header_right">
         <a href="/main/">
@@ -27,34 +29,45 @@
       </div>
     </div>
 
-    <div id="main">
-      <div class="left listItem">
-        {% if categories_list %}
+      <div class="left">
         <ul>
+          <li>
+            <form action="", method="POST" class="listBtn" id="formStage">
+              {% csrf_token %}
+              <label>{{ stage }}</label>
+              <button class="stageBtn" name="stageClicked" id="next" value="{{next_stage}}"><span class="arrow_right">&#8250;</span> [{{next_stage}}] <span class="arrow_right">&#8250;</span></button>
+              {% if previous_stage %}
+              <button class="stageBtn" name="stageClicked" id="previous" value="{{previous_stage}}"><span class="arrow_left">&#8249;</span> [{{previous_stage}}] <span class="arrow_left">&#8249;</span> </button>
+              {% else %}
+              <button class="stageBtn" name="stageClicked" id="previous" value="{{previous_stage}}" disabled><span class="arrow_left">&#8249;</span><span class="arrow_left">&#8249;</span></button>
+              {% endif %}
+            </form>
+          </li>
+        {% if categories_list %}
         <form action="", method="POST">
         {% csrf_token %}
           {% for cat in categories_list %}
-              <li><button name="id_cat", value="{{cat}}">{{ cat }}</button></li>
+              <li class="listItem"><button name="id_cat" value="{{cat}}" class="listBtn">{{ cat }}</button></li>
           {% endfor %}
         </form>
-        </ul>
         {% else %}
-            <p>No tools are available.</p>
+            <li>Il n'y a aucune catégorie à afficher</li>
         {% endif %}
+        </ul>
       </div>
-      <div class="middle listItem">
+      <div class="middle">
         {% if tools_list %}
         <ul>
           <form action="", method="POST">
             {% csrf_token %}
             {% for tool in tools_list %}
-              <li><button name="id_tool", value="{{tool}}">{{ tool }}</button></li>
+              <li class="listItem"><button name="id_tool", value="{{tool}}" class="listBtn">{{ tool }}</button></li>
             {% endfor %}
           </form>
         </ul>
         {% endif %}
       </div>
-      <div class="right table">
+      <div class="right">
         {% if current_tool %}
           <!-- <div class="date">Date de début <input type="date"></div>
           <div class="date">Date de fin     <input type="date"></div> -->
@@ -83,6 +96,7 @@
                 });
               } );
             </script>
+            <h2>{{ current_tool }}</h2>
             <label class="date">Date de début</label><input type="text" class="datepicker" id="datepickerStart">
             <label class="date">Date de fin</label><input type="text" class="datepicker" id="datepickerEnd">
             
@@ -90,6 +104,5 @@
 
         {% endif %}
       </div>
-    </div>
   </body>
 </html>
