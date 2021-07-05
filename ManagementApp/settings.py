@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 from configparser import ConfigParser
 config = ConfigParser()
 config.read("config.ini")
+
 FILE_EXCEL_CODE_AFFAIRE = config.get('EXCEL_FILE', 'FILE_EXCEL_CODE_AFFAIRE')
 FILE_EXCEL_HABILITATION = config.get('EXCEL_FILE', 'FILE_EXCEL_HABILITATION')
 FILE_EXCEL_PLANNING = config.get('EXCEL_FILE', 'FILE_EXCEL_PLANNING')
